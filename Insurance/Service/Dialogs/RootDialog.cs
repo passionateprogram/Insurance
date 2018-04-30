@@ -22,7 +22,7 @@ namespace InsuranceAgentBot.Dialogs
             await context.PostAsync("Hi I'm Insurance Agent Bot");
             await Respond(context);
             context.Wait(MessageReceivedAsync);
-                     
+
         }
 
         private static async Task Respond(IDialogContext context)
@@ -46,23 +46,18 @@ namespace InsuranceAgentBot.Dialogs
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<IMessageActivity> result)
         {
             var message = await result;
-
-            
-            {
-                this.ShowOptions(context);
-            }
-            
-            
+            ShowOptions(context, message.Text);
         }
 
-        private void ShowOptions(IDialogContext context)
+        private void ShowOptions(IDialogContext context, string username)
         {
-            PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { MedicalInsurance, LifeInsurance, MotorInsurance }, "Are you looking for a Medical Insurance, Life Insurance or a Motor Insurance?", "Not a valid option", 3);
+            PromptDialog.Choice(context, this.OnOptionSelected, new List<string>() { MedicalInsurance, LifeInsurance, MotorInsurance },
+                string.Format("Hi {0}. \r\nAre you looking for a Medical Insurance, Life Insurance or a Motor Insurance?", username), "Not a valid option", 3);
         }
 
         private async Task OnOptionSelected(IDialogContext context, IAwaitable<string> result)
         {
-           
+
             try
             {
                 string optionSelected = await result;
