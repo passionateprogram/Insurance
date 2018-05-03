@@ -134,9 +134,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\InsuranceDataAccess\InsuranceDataAccess.csproj">
-      <Project>{1295108d-a21e-4ab4-be7f-72a97be5bbcf}</Project>
-      <Name>InsuranceDataAccess</Name>
+    <ProjectReference Include="..\BusinessLogic\InsuranceBusinessLogic\InsuranceBusinessLogic.csproj">
+      <Project>{354d2ee9-0eb0-4c63-881b-f343c3afee17}</Project>
+      <Name>InsuranceBusinessLogic</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
