@@ -1,9 +1,81 @@
-﻿using System.Collections.Generic;
-
+﻿using InsuranceDataAccess.crud.reader;
+using InsuranceDataAccess.model;
+using System.Collections.Generic;
+using System.Linq;
 namespace InsuranceBusinessLogic
 {
     public class MotorInsuranceLogic
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicleType"></param>
+        /// <returns></returns>
+        public List<string> GetVehicleBrands(int vehicleType)
+        {
+            return new TblMotorDetailReader().GetVehicleBrands(vehicleType);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicleType"></param>
+        /// <param name="brandName"></param>
+        /// <returns></returns>
+        public List<string> GetVehicleModels(int vehicleType, string brandName)
+        {
+            return new TblMotorDetailReader().GetVehicleModels(vehicleType, brandName);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicleType"></param>
+        /// <param name="brandName"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public List<int> GetVehicleManufactureYear(int vehicleType, string brandName, string model)
+        {
+            return new TblMotorDetailReader().GetVehicleManufactureYear(vehicleType, brandName, model);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicleType"></param>
+        /// <param name="brandName"></param>
+        /// <param name="model"></param>
+        /// <param name="year"></param>
+        /// <returns></returns>
+        public decimal? GetVehicleAmount(int vehicleType, string brandName, string model, int year)
+        {
+            return new TblMotorDetailReader().GetVehicleAmount(vehicleType, brandName, model, year);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicleType"></param>
+        /// <returns></returns>
+        public List<MotorVendorDetail> GetVendorDetails(int vehicleType)
+        {
+            var motorVendorDetails = new TblMotorDetailReader().GetVendorDetails(vehicleType);
+            if (motorVendorDetails != null)
+                return motorVendorDetails.Select(x => BusinessUtility.Copy<tblMotorVendorDetail, MotorVendorDetail>(x, new MotorVendorDetail())).ToList();
+            return null;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="vehicleType"></param>
+        /// <param name="venderName"></param>
+        /// <returns></returns>
+        public List<string> GetVendorFeatures(int vehicleType, string venderName)
+        {
+            var feature = new TblMotorDetailReader().GetVendorFeatures(vehicleType, venderName);
+            if (!string.IsNullOrEmpty(feature))
+                feature.Split(';').ToList();
+            return null;
+        }
+
+
+
         /// <summary>
         /// 
         /// </summary>
