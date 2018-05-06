@@ -55,7 +55,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\InsuranceDataAccess\InsuranceDataAccess.csproj">
+    <ProjectReference Include="..\InsuranceDataAccess\InsuranceDataAccess.csproj">
       <Project>{1295108d-a21e-4ab4-be7f-72a97be5bbcf}</Project>
       <Name>InsuranceDataAccess</Name>
     </ProjectReference>

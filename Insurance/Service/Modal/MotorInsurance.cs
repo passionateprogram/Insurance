@@ -21,13 +21,13 @@ namespace InsuranceAgentBot.Modal
         public MotorType VechileType { get; set; }
 
         [Prompt("Please select your vechile manufacturer")]
-        public String Manufacturer { get; set; }
+        public String VehicleBrand { get; set; }
 
         [Prompt("Please select your vechile model")]
-        public String Model { get; set; }
+        public String VehicleModel { get; set; }
 
         [Prompt("Please select your vechile manufacturing year")]
-        public DateTime ManufacturingYear { get; set; }
+        public int ManufacturingYear { get; set; }
 
         [Prompt("Have you claimed in previous year")]
         public bool PreviousYearClaim { get; set; }
@@ -47,9 +47,9 @@ namespace InsuranceAgentBot.Modal
                 .Field(nameof(VechileType))
 
                 //Manufacturer
-                .Field(new FieldReflector<MotorInsuranceModel>(nameof(Manufacturer))
+                .Field(new FieldReflector<MotorInsuranceModel>(nameof(VehicleBrand))
                 .SetType(null)
-                .SetActive(x => { return string.IsNullOrEmpty(x.Manufacturer); })
+                .SetActive(x => { return string.IsNullOrEmpty(x.VehicleBrand); })
                 .SetPrompt(new PromptAttribute("Please select your vehicle manufacturer: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
@@ -64,15 +64,15 @@ namespace InsuranceAgentBot.Modal
                 }))
 
                 //Vehicle Model
-                .Field(new FieldReflector<MotorInsuranceModel>(nameof(Model))
+                .Field(new FieldReflector<MotorInsuranceModel>(nameof(VehicleModel))
                 .SetType(null)
-                .SetActive(x => { return string.IsNullOrEmpty(x.Model); })
+                .SetActive(x => { return string.IsNullOrEmpty(x.VehicleModel); })
                 .SetPrompt(new PromptAttribute("Please select your vehicle model: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
-                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.Manufacturer))
+                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.VehicleBrand))
                     {
-                        var vehicleModels = new MotorInsuranceLogic().GetVehicleModels((int)state.VechileType, state.Manufacturer);
+                        var vehicleModels = new MotorInsuranceLogic().GetVehicleModels((int)state.VechileType, state.VehicleBrand);
                         foreach (var vehicleModel in vehicleModels)
                             field.AddDescription(vehicleModel, vehicleModel).AddTerms(vehicleModel, vehicleModel);
                         return await Task.FromResult(true);
@@ -83,13 +83,13 @@ namespace InsuranceAgentBot.Modal
                 //Year of Purchase
                 .Field(new FieldReflector<MotorInsuranceModel>(nameof(ManufacturingYear))
                 .SetType(null)
-                .SetActive(x => { return x.ManufacturingYear == DateTime.MinValue; })
+                .SetActive(x => { return x.ManufacturingYear != 0; })
                 .SetPrompt(new PromptAttribute("Please select your vehicle manufacturing year: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
-                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.Manufacturer) && !string.IsNullOrEmpty(state.Model))
+                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.VehicleBrand) && !string.IsNullOrEmpty(state.VehicleModel))
                     {
-                        var manufactureringYears = new MotorInsuranceLogic().GetVehicleManufactureYear((int)state.VechileType, state.Manufacturer, state.Model);
+                        var manufactureringYears = new MotorInsuranceLogic().GetVehicleManufactureYear((int)state.VechileType, state.VehicleBrand, state.VehicleModel);
                         foreach (var manufacturerYear in manufactureringYears)
                             field.AddDescription(manufacturerYear, manufacturerYear.ToString()).AddTerms(manufacturerYear, manufacturerYear.ToString());
                         return await Task.FromResult(true);
@@ -100,20 +100,20 @@ namespace InsuranceAgentBot.Modal
                 //Claim
                 .Field(nameof(PreviousYearClaim))
 
-                //Year of Purchase
+                //InsuranceAgent
                 .Field(new FieldReflector<MotorInsuranceModel>(nameof(InsuranceAgent))
                 .SetType(null)
                 .SetActive(x => { return string.IsNullOrEmpty(x.InsuranceAgent); })
                 .SetPrompt(new PromptAttribute("Please select your vehicle manufacturing year: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
-                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.Manufacturer) && !string.IsNullOrEmpty(state.Model) && state.ManufacturingYear != DateTime.MinValue)
+                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.VehicleBrand) && !string.IsNullOrEmpty(state.VehicleModel) && state.ManufacturingYear != 0)
                     {
-                        var vehicleAmount = new MotorInsuranceLogic().GetVehicleAmount((int)state.VechileType, state.Manufacturer, state.Model, state.ManufacturingYear.Year);
+                        var vehicleAmount = new MotorInsuranceLogic().GetVehicleAmount((int)state.VechileType, state.VehicleBrand, state.VehicleModel, state.ManufacturingYear);
                         var vendorDetails = new MotorInsuranceLogic().GetVendorDetails((int)state.VechileType);
                         foreach (var vendor in vendorDetails)
                         {
-                            var vendorDetail = vendor.ToString(vehicleAmount, state.ManufacturingYear.Year);
+                            var vendorDetail = vendor.ToString(vehicleAmount, state.ManufacturingYear);
                             field.AddDescription(vendorDetail, vendorDetail).AddTerms(vendorDetail, vendorDetail);
                         }
                         return await Task.FromResult(true);
