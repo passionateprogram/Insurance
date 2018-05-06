@@ -8,6 +8,23 @@ namespace InsuranceBusinessLogic
         public string VendorName { get; set; }
         public decimal Rate { get; set; }
         public string Features { get; set; }
-        public Nullable<int> VehicleType { get; set; }
+        public int? VehicleType { get; set; }
+
+        public decimal Premium { get; set; }
+
+        public string ToString(decimal? vehicleAmount, int manufacturingYear)
+        {
+            if (vehicleAmount.HasValue)
+            {
+                var depreciation = vehicleAmount.Value;
+                for (var i = manufacturingYear; i <= DateTime.Now.Year; i--)
+                {
+                    depreciation = depreciation * (decimal)0.5;
+                }
+                Premium = depreciation * Rate;
+                return string.Format("{0} offers the premuim of INR {1}/-", VendorName, Premium);
+            }
+            return null;
+        }
     }
 }

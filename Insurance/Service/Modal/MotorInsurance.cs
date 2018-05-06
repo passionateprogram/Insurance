@@ -32,6 +32,11 @@ namespace InsuranceAgentBot.Modal
         [Prompt("Have you claimed in previous year")]
         public bool PreviousYearClaim { get; set; }
 
+        [Prompt("Please select Insurance")]
+        public string InsuranceAgent { get; set; }
+
+        private decimal? vehicleAmount;
+
         public static IForm<MotorInsuranceModel> BuildForm()
         {
             return new FormBuilder<MotorInsuranceModel>()
@@ -48,10 +53,14 @@ namespace InsuranceAgentBot.Modal
                 .SetPrompt(new PromptAttribute("Please select your vehicle manufacturer: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
-                    var vehicleManufacturers = new MotorInsuranceLogic().GetVehicleManufacturerList(state.VechileType.ToString());
-                    foreach (var vehicleManufacturer in vehicleManufacturers)
-                        field.AddDescription(vehicleManufacturer, vehicleManufacturer).AddTerms(vehicleManufacturer, vehicleManufacturer);
-                    return await Task.FromResult(true);
+                    if (state.VechileType > 0)
+                    {
+                        var vehicleManufacturers = new MotorInsuranceLogic().GetVehicleBrands((int)state.VechileType);
+                        foreach (var vehicleManufacturer in vehicleManufacturers)
+                            field.AddDescription(vehicleManufacturer, vehicleManufacturer).AddTerms(vehicleManufacturer, vehicleManufacturer);
+                        return await Task.FromResult(true);
+                    }
+                    return await Task.FromResult(false);
                 }))
 
                 //Vehicle Model
@@ -61,10 +70,14 @@ namespace InsuranceAgentBot.Modal
                 .SetPrompt(new PromptAttribute("Please select your vehicle model: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
-                    var vehicleModels = new MotorInsuranceLogic().GetVehicleModelList(state.VechileType.ToString(), state.Manufacturer);
-                    foreach (var vehicleModel in vehicleModels)
-                        field.AddDescription(vehicleModel, vehicleModel).AddTerms(vehicleModel, vehicleModel);
-                    return await Task.FromResult(true);
+                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.Manufacturer))
+                    {
+                        var vehicleModels = new MotorInsuranceLogic().GetVehicleModels((int)state.VechileType, state.Manufacturer);
+                        foreach (var vehicleModel in vehicleModels)
+                            field.AddDescription(vehicleModel, vehicleModel).AddTerms(vehicleModel, vehicleModel);
+                        return await Task.FromResult(true);
+                    }
+                    return await Task.FromResult(false);
                 }))
 
                 //Year of Purchase
@@ -74,14 +87,39 @@ namespace InsuranceAgentBot.Modal
                 .SetPrompt(new PromptAttribute("Please select your vehicle manufacturing year: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
                 .SetDefine(async (state, field) =>
                 {
-                    var manufactureringYears = new MotorInsuranceLogic().GetManufacturingYear();
-                    foreach (var manufacturerYear in manufactureringYears)
-                        field.AddDescription(manufacturerYear, manufacturerYear.ToString()).AddTerms(manufacturerYear, manufacturerYear.ToString());
-                    return await Task.FromResult(true);
+                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.Manufacturer) && !string.IsNullOrEmpty(state.Model))
+                    {
+                        var manufactureringYears = new MotorInsuranceLogic().GetVehicleManufactureYear((int)state.VechileType, state.Manufacturer, state.Model);
+                        foreach (var manufacturerYear in manufactureringYears)
+                            field.AddDescription(manufacturerYear, manufacturerYear.ToString()).AddTerms(manufacturerYear, manufacturerYear.ToString());
+                        return await Task.FromResult(true);
+                    }
+                    return await Task.FromResult(false);
                 }))
 
                 //Claim
                 .Field(nameof(PreviousYearClaim))
+
+                //Year of Purchase
+                .Field(new FieldReflector<MotorInsuranceModel>(nameof(InsuranceAgent))
+                .SetType(null)
+                .SetActive(x => { return string.IsNullOrEmpty(x.InsuranceAgent); })
+                .SetPrompt(new PromptAttribute("Please select your vehicle manufacturing year: {||}") { ChoiceStyle = ChoiceStyleOptions.Buttons })
+                .SetDefine(async (state, field) =>
+                {
+                    if (state.VechileType > 0 && !string.IsNullOrEmpty(state.Manufacturer) && !string.IsNullOrEmpty(state.Model) && state.ManufacturingYear != DateTime.MinValue)
+                    {
+                        var vehicleAmount = new MotorInsuranceLogic().GetVehicleAmount((int)state.VechileType, state.Manufacturer, state.Model, state.ManufacturingYear.Year);
+                        var vendorDetails = new MotorInsuranceLogic().GetVendorDetails((int)state.VechileType);
+                        foreach (var vendor in vendorDetails)
+                        {
+                            var vendorDetail = vendor.ToString(vehicleAmount, state.ManufacturingYear.Year);
+                            field.AddDescription(vendorDetail, vendorDetail).AddTerms(vendorDetail, vendorDetail);
+                        }
+                        return await Task.FromResult(true);
+                    }
+                    return await Task.FromResult(false);
+                }))
 
                 .Build();
         }
