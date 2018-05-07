@@ -12,11 +12,15 @@ namespace InsuranceDataAccess.model
     using System;
     using System.Collections.Generic;
     
-    public partial class HotelMaster
+    public partial class tblMediPolicyDetail
     {
-        public int RoomID { get; set; }
-        public string RoomNo { get; set; }
-        public string RoomType { get; set; }
-        public string Prize { get; set; }
+        public int ID { get; set; }
+        public string PolicyCode { get; set; }
+        public string PolicyName { get; set; }
+        public decimal MaxAmount { get; set; }
+        public int year { get; set; }
+        public decimal MinAmount { get; set; }
+        public int CompanyID { get; set; }
+        public Nullable<decimal> PremiumAmount { get; set; }
     }
 }

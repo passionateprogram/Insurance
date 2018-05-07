@@ -25,12 +25,15 @@ namespace InsuranceDataAccess.model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<HotelMaster> HotelMasters { get; set; }
-        public virtual DbSet<tblCustomerDetail> tblCustomerDetails { get; set; }
-        public virtual DbSet<tblMotorDetail> tblMotorDetails { get; set; }
-        public virtual DbSet<tblMotorPolicyType> tblMotorPolicyTypes { get; set; }
+        public virtual DbSet<tblInsuranceType> tblInsuranceTypes { get; set; }
+        public virtual DbSet<tblMotorVehicleType> tblMotorVehicleTypes { get; set; }
         public virtual DbSet<tblMotorVendorDetail> tblMotorVendorDetails { get; set; }
+        public virtual DbSet<tblCustomerDetail> tblCustomerDetails { get; set; }
+        public virtual DbSet<tblMediPolicyDetail> tblMediPolicyDetails { get; set; }
+        public virtual DbSet<tblMedTransactionDetail> tblMedTransactionDetails { get; set; }
+        public virtual DbSet<tblMotorDetail> tblMotorDetails { get; set; }
+        public virtual DbSet<tblMotorPaymentDetail> tblMotorPaymentDetails { get; set; }
+        public virtual DbSet<tblMotorType> tblMotorTypes { get; set; }
         public virtual DbSet<tblNomineeDetail> tblNomineeDetails { get; set; }
-        public virtual DbSet<database_firewall_rules> database_firewall_rules { get; set; }
     }
 }

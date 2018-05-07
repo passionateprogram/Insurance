@@ -55,13 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="crud\reader\CustomerDetailsReader.cs" />
     <Compile Include="crud\reader\TblMotorDetailReader.cs" />
-    <Compile Include="model\database_firewall_rules.cs">
-      <DependentUpon>Insurancedb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="model\HotelMaster.cs">
-      <DependentUpon>Insurancedb.tt</DependentUpon>
-    </Compile>
     <Compile Include="model\Insurancedb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -80,10 +75,25 @@
     <Compile Include="model\tblCustomerDetail.cs">
       <DependentUpon>Insurancedb.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\tblInsuranceType.cs">
+      <DependentUpon>Insurancedb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\tblMediPolicyDetail.cs">
+      <DependentUpon>Insurancedb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\tblMedTransactionDetail.cs">
+      <DependentUpon>Insurancedb.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\tblMotorDetail.cs">
       <DependentUpon>Insurancedb.tt</DependentUpon>
     </Compile>
-    <Compile Include="model\tblMotorPolicyType.cs">
+    <Compile Include="model\tblMotorPaymentDetail.cs">
+      <DependentUpon>Insurancedb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\tblMotorType.cs">
+      <DependentUpon>Insurancedb.tt</DependentUpon>
+    </Compile>
+    <Compile Include="model\tblMotorVehicleType.cs">
       <DependentUpon>Insurancedb.tt</DependentUpon>
     </Compile>
     <Compile Include="model\tblMotorVendorDetail.cs">

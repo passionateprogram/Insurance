@@ -4,14 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="626bddf1f1464843aa0d9a6ef7c7c32d" Name="Diagram1">
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.HotelMaster" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblCustomerDetail" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorDetail" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorPolicyType" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorVendorDetail" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblNomineeDetail" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="hackathonteam289_dbModel.database_firewall_rules" Width="1.5" PointX="6.75" PointY="3.75" IsExpanded="true" />
+      <Diagram DiagramId="626bddf1f1464843aa0d9a6ef7c7c32d" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblInsuranceType" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorVehicleType" Width="1.5" PointX="0.75" PointY="3.5" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorVendorDetail" Width="1.5" PointX="3" PointY="7" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblCustomerDetail" Width="1.5" PointX="5.75" PointY="0.875" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMediPolicyDetail" Width="1.5" PointX="7.75" PointY="0.875" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMedTransactionDetail" Width="1.5" PointX="7.75" PointY="4.875" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorDetail" Width="1.5" PointX="3" PointY="3.125" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorPaymentDetail" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMotorType" Width="1.5" PointX="7.75" PointY="8.875" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblNomineeDetail" Width="1.5" PointX="9.75" PointY="0.875" />
+        <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorDetails_tblInsuranceTypes" />
+        <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorDetails_tblMotorVehicleTypes" />
+        <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorVendorDetails_tblMotorVehicleTypes" />
+        <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorPaymentDetails_tblMotorVendorDetails" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

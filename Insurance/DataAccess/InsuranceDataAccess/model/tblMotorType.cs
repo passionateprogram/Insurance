@@ -12,11 +12,9 @@ namespace InsuranceDataAccess.model
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMotorPolicyType
+    public partial class tblMotorType
     {
         public int ID { get; set; }
-        public int VechileType { get; set; }
-        public string Description { get; set; }
-        public string UsageType { get; set; }
+        public string VehicleDesc { get; set; }
     }
 }

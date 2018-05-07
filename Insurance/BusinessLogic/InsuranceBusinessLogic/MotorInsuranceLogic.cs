@@ -73,7 +73,18 @@ namespace InsuranceBusinessLogic
                 feature.Split(';').ToList();
             return null;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mobileNum"></param>
+        /// <returns></returns>
+        public CustomerDetail GetCustomerDetails(string mobileNum)
+        {
+            var customerDetails = new CustomerDetailsReader().GetCustomerDetails(mobileNum);
+            if (customerDetails != null)
+                return customerDetails.Select(x => BusinessUtility.Copy<tblCustomerDetail, CustomerDetail>(x, new CustomerDetail())).FirstOrDefault();
+            return null;
+        }
 
         #region Dummy Entries
         /// <summary>

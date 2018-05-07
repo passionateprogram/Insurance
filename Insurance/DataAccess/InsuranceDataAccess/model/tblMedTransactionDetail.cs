@@ -12,18 +12,16 @@ namespace InsuranceDataAccess.model
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMotorDetail
+    public partial class tblMedTransactionDetail
     {
         public int ID { get; set; }
-        public string Brand { get; set; }
-        public string Model { get; set; }
-        public int VehicleType { get; set; }
-        public int Make { get; set; }
-        public int InsuranceType { get; set; }
-        public int ReleaseVersion { get; set; }
-        public Nullable<decimal> BaselineAmount { get; set; }
-    
-        public virtual tblInsuranceType tblInsuranceType { get; set; }
-        public virtual tblMotorVehicleType tblMotorVehicleType { get; set; }
+        public System.DateTime PaymentDate { get; set; }
+        public decimal AmountPaid { get; set; }
+        public int PolicyId { get; set; }
+        public int PaymentTerm { get; set; }
+        public int PaymentMode { get; set; }
+        public Nullable<long> ChequeNo { get; set; }
+        public string TransactionNo { get; set; }
+        public System.DateTime ExpiryDate { get; set; }
     }
 }

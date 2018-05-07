@@ -4,16 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="hackathonteam289_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="HotelMaster">
-          <Key>
-            <PropertyRef Name="RoomID" />
-          </Key>
-          <Property Name="RoomID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoomNo" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="RoomType" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="Prize" Type="varchar" MaxLength="100" Nullable="false" />
-        </EntityType>
+    <Schema Namespace="hackathonteam289_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'hackathonteam289_db.dbo.tblCustomerDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblCustomerDetails">
@@ -53,6 +44,56 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblCustomerDetails' does n
           <Property Name="DrivingLicenseExpiry" Type="date" />
           <Property Name="MaritalStatus" Type="varchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="tblInsuranceTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InsuranceType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hackathonteam289_db.dbo.tblMediPolicyDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblMediPolicyDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PolicyCode" />
+            <PropertyRef Name="PolicyName" />
+            <PropertyRef Name="MaxAmount" />
+            <PropertyRef Name="year" />
+            <PropertyRef Name="MinAmount" />
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PolicyCode" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="PolicyName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="MaxAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="year" Type="int" Nullable="false" />
+          <Property Name="MinAmount" Type="decimal" Precision="12" Scale="2" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="PremiumAmount" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hackathonteam289_db.dbo.tblMedTransactionDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblMedTransactionDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PaymentDate" />
+            <PropertyRef Name="AmountPaid" />
+            <PropertyRef Name="PolicyId" />
+            <PropertyRef Name="PaymentTerm" />
+            <PropertyRef Name="PaymentMode" />
+            <PropertyRef Name="ExpiryDate" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="AmountPaid" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="PolicyId" Type="int" Nullable="false" />
+          <Property Name="PaymentTerm" Type="int" Nullable="false" />
+          <Property Name="PaymentMode" Type="int" Nullable="false" />
+          <Property Name="ChequeNo" Type="bigint" />
+          <Property Name="TransactionNo" Type="nvarchar" MaxLength="30" />
+          <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblMotorDetails">
@@ -75,25 +116,47 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorDetails' does not 
           <Property Name="BaselineAmount" Type="decimal" Precision="12" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorPolicyTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="tblMotorPolicyTypes">
+warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorPaymentDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblMotorPaymentDetails">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="VechileType" />
-            <PropertyRef Name="UsageType" />
+            <PropertyRef Name="PaymentDate" />
+            <PropertyRef Name="AmountPaid" />
+            <PropertyRef Name="VendorID" />
+            <PropertyRef Name="PolicyNo" />
+            <PropertyRef Name="ExpiryDate" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentDate" Type="datetime" Nullable="false" />
+          <Property Name="AmountPaid" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="VendorID" Type="int" Nullable="false" />
+          <Property Name="PolicyNo" Type="int" Nullable="false" />
+          <Property Name="ChassisNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="EngineNo" Type="nvarchar" MaxLength="50" />
+          <Property Name="ExpiryDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblMotorTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="VehicleDesc" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VehicleDesc" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblMotorVehicleTypes">
+          <Key>
+            <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VechileType" Type="int" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="50" />
           <Property Name="UsageType" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorVendorDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblMotorVendorDetails">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="VendorName" />
-            <PropertyRef Name="Rate" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="VendorName" Type="varchar" MaxLength="50" Nullable="false" />
@@ -129,26 +192,58 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="CustomerID" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="start_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="end_ip_address" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="create_date" Type="datetime" Nullable="false" />
-          <Property Name="modify_date" Type="datetime" Nullable="false" />
-        </EntityType>
+        <Association Name="FK_tblMotorDetails_tblInsuranceTypes">
+          <End Role="tblInsuranceTypes" Type="Self.tblInsuranceTypes" Multiplicity="1" />
+          <End Role="tblMotorDetails" Type="Self.tblMotorDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInsuranceTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorDetails">
+              <PropertyRef Name="InsuranceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMotorDetails_tblMotorVehicleTypes">
+          <End Role="tblMotorVehicleTypes" Type="Self.tblMotorVehicleTypes" Multiplicity="1" />
+          <End Role="tblMotorDetails" Type="Self.tblMotorDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMotorVehicleTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorDetails">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMotorPaymentDetails_tblMotorVendorDetails">
+          <End Role="tblMotorVendorDetails" Type="Self.tblMotorVendorDetails" Multiplicity="1" />
+          <End Role="tblMotorPaymentDetails" Type="Self.tblMotorPaymentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMotorVendorDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorPaymentDetails">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMotorVendorDetails_tblMotorVehicleTypes">
+          <End Role="tblMotorVehicleTypes" Type="Self.tblMotorVehicleTypes" Multiplicity="0..1" />
+          <End Role="tblMotorVendorDetails" Type="Self.tblMotorVendorDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMotorVehicleTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorVendorDetails">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="hackathonteam289_dbModelStoreContainer">
-          <EntitySet Name="HotelMaster" EntityType="Self.HotelMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblInsuranceTypes" EntityType="Self.tblInsuranceTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMotorVehicleTypes" EntityType="Self.tblMotorVehicleTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblMotorVendorDetails" EntityType="Self.tblMotorVendorDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblCustomerDetails" EntityType="Self.tblCustomerDetails" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tblCustomerDetails].[CustomerID] AS [CustomerID], 
@@ -171,6 +266,31 @@ warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' d
     [tblCustomerDetails].[MaritalStatus] AS [MaritalStatus]
     FROM [dbo].[tblCustomerDetails] AS [tblCustomerDetails]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="tblMediPolicyDetails" EntityType="Self.tblMediPolicyDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblMediPolicyDetails].[ID] AS [ID], 
+    [tblMediPolicyDetails].[PolicyCode] AS [PolicyCode], 
+    [tblMediPolicyDetails].[PolicyName] AS [PolicyName], 
+    [tblMediPolicyDetails].[MaxAmount] AS [MaxAmount], 
+    [tblMediPolicyDetails].[year] AS [year], 
+    [tblMediPolicyDetails].[MinAmount] AS [MinAmount], 
+    [tblMediPolicyDetails].[CompanyID] AS [CompanyID], 
+    [tblMediPolicyDetails].[PremiumAmount] AS [PremiumAmount]
+    FROM [dbo].[tblMediPolicyDetails] AS [tblMediPolicyDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblMedTransactionDetails" EntityType="Self.tblMedTransactionDetails" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblMedTransactionDetails].[ID] AS [ID], 
+    [tblMedTransactionDetails].[PaymentDate] AS [PaymentDate], 
+    [tblMedTransactionDetails].[AmountPaid] AS [AmountPaid], 
+    [tblMedTransactionDetails].[PolicyId] AS [PolicyId], 
+    [tblMedTransactionDetails].[PaymentTerm] AS [PaymentTerm], 
+    [tblMedTransactionDetails].[PaymentMode] AS [PaymentMode], 
+    [tblMedTransactionDetails].[ChequeNo] AS [ChequeNo], 
+    [tblMedTransactionDetails].[TransactionNo] AS [TransactionNo], 
+    [tblMedTransactionDetails].[ExpiryDate] AS [ExpiryDate]
+    FROM [dbo].[tblMedTransactionDetails] AS [tblMedTransactionDetails]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="tblMotorDetails" EntityType="Self.tblMotorDetails" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [tblMotorDetails].[ID] AS [ID], 
@@ -183,22 +303,23 @@ warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' d
     [tblMotorDetails].[BaselineAmount] AS [BaselineAmount]
     FROM [dbo].[tblMotorDetails] AS [tblMotorDetails]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="tblMotorPolicyTypes" EntityType="Self.tblMotorPolicyTypes" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="tblMotorPaymentDetails" EntityType="Self.tblMotorPaymentDetails" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [tblMotorPolicyTypes].[ID] AS [ID], 
-    [tblMotorPolicyTypes].[VechileType] AS [VechileType], 
-    [tblMotorPolicyTypes].[Description] AS [Description], 
-    [tblMotorPolicyTypes].[UsageType] AS [UsageType]
-    FROM [dbo].[tblMotorPolicyTypes] AS [tblMotorPolicyTypes]</DefiningQuery>
+    [tblMotorPaymentDetails].[ID] AS [ID], 
+    [tblMotorPaymentDetails].[PaymentDate] AS [PaymentDate], 
+    [tblMotorPaymentDetails].[AmountPaid] AS [AmountPaid], 
+    [tblMotorPaymentDetails].[VendorID] AS [VendorID], 
+    [tblMotorPaymentDetails].[PolicyNo] AS [PolicyNo], 
+    [tblMotorPaymentDetails].[ChassisNo] AS [ChassisNo], 
+    [tblMotorPaymentDetails].[EngineNo] AS [EngineNo], 
+    [tblMotorPaymentDetails].[ExpiryDate] AS [ExpiryDate]
+    FROM [dbo].[tblMotorPaymentDetails] AS [tblMotorPaymentDetails]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="tblMotorVendorDetails" EntityType="Self.tblMotorVendorDetails" store:Type="Tables" store:Schema="dbo">
+          <EntitySet Name="tblMotorTypes" EntityType="Self.tblMotorTypes" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [tblMotorVendorDetails].[ID] AS [ID], 
-    [tblMotorVendorDetails].[VendorName] AS [VendorName], 
-    [tblMotorVendorDetails].[Rate] AS [Rate], 
-    [tblMotorVendorDetails].[Features] AS [Features], 
-    [tblMotorVendorDetails].[VehicleType] AS [VehicleType]
-    FROM [dbo].[tblMotorVendorDetails] AS [tblMotorVendorDetails]</DefiningQuery>
+    [tblMotorTypes].[ID] AS [ID], 
+    [tblMotorTypes].[VehicleDesc] AS [VehicleDesc]
+    FROM [dbo].[tblMotorTypes] AS [tblMotorTypes]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tblNomineeDetails" EntityType="Self.tblNomineeDetails" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -215,30 +336,85 @@ warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' d
     [tblNomineeDetails].[CustomerID] AS [CustomerID]
     FROM [dbo].[tblNomineeDetails] AS [tblNomineeDetails]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" store:Type="Views" store:Schema="sys">
-            <DefiningQuery>SELECT 
-    [database_firewall_rules].[id] AS [id], 
-    [database_firewall_rules].[name] AS [name], 
-    [database_firewall_rules].[start_ip_address] AS [start_ip_address], 
-    [database_firewall_rules].[end_ip_address] AS [end_ip_address], 
-    [database_firewall_rules].[create_date] AS [create_date], 
-    [database_firewall_rules].[modify_date] AS [modify_date]
-    FROM [sys].[database_firewall_rules] AS [database_firewall_rules]</DefiningQuery>
-          </EntitySet>
+          <AssociationSet Name="FK_tblMotorDetails_tblInsuranceTypes" Association="Self.FK_tblMotorDetails_tblInsuranceTypes">
+            <End Role="tblInsuranceTypes" EntitySet="tblInsuranceTypes" />
+            <End Role="tblMotorDetails" EntitySet="tblMotorDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMotorDetails_tblMotorVehicleTypes" Association="Self.FK_tblMotorDetails_tblMotorVehicleTypes">
+            <End Role="tblMotorVehicleTypes" EntitySet="tblMotorVehicleTypes" />
+            <End Role="tblMotorDetails" EntitySet="tblMotorDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMotorPaymentDetails_tblMotorVendorDetails" Association="Self.FK_tblMotorPaymentDetails_tblMotorVendorDetails">
+            <End Role="tblMotorVendorDetails" EntitySet="tblMotorVendorDetails" />
+            <End Role="tblMotorPaymentDetails" EntitySet="tblMotorPaymentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMotorVendorDetails_tblMotorVehicleTypes" Association="Self.FK_tblMotorVendorDetails_tblMotorVehicleTypes">
+            <End Role="tblMotorVehicleTypes" EntitySet="tblMotorVehicleTypes" />
+            <End Role="tblMotorVendorDetails" EntitySet="tblMotorVendorDetails" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="hackathonteam289_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="HotelMaster">
+        <EntityContainer Name="hackathonteam289_dbEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblInsuranceTypes" EntityType="hackathonteam289_dbModel.tblInsuranceType" />
+          <EntitySet Name="tblMotorVehicleTypes" EntityType="hackathonteam289_dbModel.tblMotorVehicleType" />
+          <EntitySet Name="tblMotorVendorDetails" EntityType="hackathonteam289_dbModel.tblMotorVendorDetail" />
+          <EntitySet Name="tblCustomerDetails" EntityType="hackathonteam289_dbModel.tblCustomerDetail" />
+          <EntitySet Name="tblMediPolicyDetails" EntityType="hackathonteam289_dbModel.tblMediPolicyDetail" />
+          <EntitySet Name="tblMedTransactionDetails" EntityType="hackathonteam289_dbModel.tblMedTransactionDetail" />
+          <EntitySet Name="tblMotorDetails" EntityType="hackathonteam289_dbModel.tblMotorDetail" />
+          <EntitySet Name="tblMotorPaymentDetails" EntityType="hackathonteam289_dbModel.tblMotorPaymentDetail" />
+          <EntitySet Name="tblMotorTypes" EntityType="hackathonteam289_dbModel.tblMotorType" />
+          <EntitySet Name="tblNomineeDetails" EntityType="hackathonteam289_dbModel.tblNomineeDetail" />
+          <AssociationSet Name="FK_tblMotorDetails_tblInsuranceTypes" Association="hackathonteam289_dbModel.FK_tblMotorDetails_tblInsuranceTypes">
+            <End Role="tblInsuranceType" EntitySet="tblInsuranceTypes" />
+            <End Role="tblMotorDetail" EntitySet="tblMotorDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMotorDetails_tblMotorVehicleTypes" Association="hackathonteam289_dbModel.FK_tblMotorDetails_tblMotorVehicleTypes">
+            <End Role="tblMotorVehicleType" EntitySet="tblMotorVehicleTypes" />
+            <End Role="tblMotorDetail" EntitySet="tblMotorDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMotorVendorDetails_tblMotorVehicleTypes" Association="hackathonteam289_dbModel.FK_tblMotorVendorDetails_tblMotorVehicleTypes">
+            <End Role="tblMotorVehicleType" EntitySet="tblMotorVehicleTypes" />
+            <End Role="tblMotorVendorDetail" EntitySet="tblMotorVendorDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tblMotorPaymentDetails_tblMotorVendorDetails" Association="hackathonteam289_dbModel.FK_tblMotorPaymentDetails_tblMotorVendorDetails">
+            <End Role="tblMotorVendorDetail" EntitySet="tblMotorVendorDetails" />
+            <End Role="tblMotorPaymentDetail" EntitySet="tblMotorPaymentDetails" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tblInsuranceType">
           <Key>
-            <PropertyRef Name="RoomID" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="RoomID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoomNo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="RoomType" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Prize" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InsuranceType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tblMotorDetails" Relationship="hackathonteam289_dbModel.FK_tblMotorDetails_tblInsuranceTypes" FromRole="tblInsuranceType" ToRole="tblMotorDetail" />
+        </EntityType>
+        <EntityType Name="tblMotorVehicleType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VechileType" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsageType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblMotorDetails" Relationship="hackathonteam289_dbModel.FK_tblMotorDetails_tblMotorVehicleTypes" FromRole="tblMotorVehicleType" ToRole="tblMotorDetail" />
+          <NavigationProperty Name="tblMotorVendorDetails" Relationship="hackathonteam289_dbModel.FK_tblMotorVendorDetails_tblMotorVehicleTypes" FromRole="tblMotorVehicleType" ToRole="tblMotorVendorDetail" />
+        </EntityType>
+        <EntityType Name="tblMotorVendorDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="VendorName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="Features" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="VehicleType" Type="Int32" />
+          <NavigationProperty Name="tblMotorVehicleType" Relationship="hackathonteam289_dbModel.FK_tblMotorVendorDetails_tblMotorVehicleTypes" FromRole="tblMotorVendorDetail" ToRole="tblMotorVehicleType" />
+          <NavigationProperty Name="tblMotorPaymentDetails" Relationship="hackathonteam289_dbModel.FK_tblMotorPaymentDetails_tblMotorVendorDetails" FromRole="tblMotorVendorDetail" ToRole="tblMotorPaymentDetail" />
         </EntityType>
         <EntityType Name="tblCustomerDetail">
           <Key>
@@ -259,23 +435,62 @@ warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' d
             <PropertyRef Name="MaritalStatus" />
           </Key>
           <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CustomerRefID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Pincode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PrimaryContactNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerRefID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PrimaryContactNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="SeccondaryContactNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Gender" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="SSN" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Gender" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="SSN" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="DrivingLicenseNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="DrivingLicenseExpiry" Type="DateTime" Precision="0" />
-          <Property Name="MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MaritalStatus" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblMediPolicyDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PolicyCode" />
+            <PropertyRef Name="PolicyName" />
+            <PropertyRef Name="MaxAmount" />
+            <PropertyRef Name="year" />
+            <PropertyRef Name="MinAmount" />
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyCode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PolicyName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MaxAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="year" Type="Int32" Nullable="false" />
+          <Property Name="MinAmount" Type="Decimal" Nullable="false" Precision="12" Scale="2" />
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="PremiumAmount" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tblMedTransactionDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PaymentDate" />
+            <PropertyRef Name="AmountPaid" />
+            <PropertyRef Name="PolicyId" />
+            <PropertyRef Name="PaymentTerm" />
+            <PropertyRef Name="PaymentMode" />
+            <PropertyRef Name="ExpiryDate" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AmountPaid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="PolicyId" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTerm" Type="Int32" Nullable="false" />
+          <Property Name="PaymentMode" Type="Int32" Nullable="false" />
+          <Property Name="ChequeNo" Type="Int64" />
+          <Property Name="TransactionNo" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
         <EntityType Name="tblMotorDetail">
           <Key>
@@ -288,36 +503,42 @@ warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' d
             <PropertyRef Name="ReleaseVersion" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="Brand" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Model" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Brand" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="VehicleType" Type="Int32" Nullable="false" />
           <Property Name="Make" Type="Int32" Nullable="false" />
           <Property Name="InsuranceType" Type="Int32" Nullable="false" />
           <Property Name="ReleaseVersion" Type="Int32" Nullable="false" />
           <Property Name="BaselineAmount" Type="Decimal" Precision="12" Scale="2" />
+          <NavigationProperty Name="tblInsuranceType" Relationship="hackathonteam289_dbModel.FK_tblMotorDetails_tblInsuranceTypes" FromRole="tblMotorDetail" ToRole="tblInsuranceType" />
+          <NavigationProperty Name="tblMotorVehicleType" Relationship="hackathonteam289_dbModel.FK_tblMotorDetails_tblMotorVehicleTypes" FromRole="tblMotorDetail" ToRole="tblMotorVehicleType" />
         </EntityType>
-        <EntityType Name="tblMotorPolicyType">
+        <EntityType Name="tblMotorPaymentDetail">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="VechileType" />
-            <PropertyRef Name="UsageType" />
+            <PropertyRef Name="PaymentDate" />
+            <PropertyRef Name="AmountPaid" />
+            <PropertyRef Name="VendorID" />
+            <PropertyRef Name="PolicyNo" />
+            <PropertyRef Name="ExpiryDate" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VechileType" Type="Int32" Nullable="false" />
-          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="UsageType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PaymentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AmountPaid" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="VendorID" Type="Int32" Nullable="false" />
+          <Property Name="PolicyNo" Type="Int32" Nullable="false" />
+          <Property Name="ChassisNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EngineNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="tblMotorVendorDetail" Relationship="hackathonteam289_dbModel.FK_tblMotorPaymentDetails_tblMotorVendorDetails" FromRole="tblMotorPaymentDetail" ToRole="tblMotorVendorDetail" />
         </EntityType>
-        <EntityType Name="tblMotorVendorDetail">
+        <EntityType Name="tblMotorType">
           <Key>
             <PropertyRef Name="ID" />
-            <PropertyRef Name="VendorName" />
-            <PropertyRef Name="Rate" />
+            <PropertyRef Name="VehicleDesc" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="VendorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
-          <Property Name="Features" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="VehicleType" Type="Int32" />
+          <Property Name="VehicleDesc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="tblNomineeDetail">
           <Key>
@@ -334,143 +555,203 @@ warning 6002: The table/view 'hackathonteam289_db.sys.database_firewall_rules' d
             <PropertyRef Name="CustomerID" />
           </Key>
           <Property Name="NomineeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NomineeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="City" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="State" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Pincode" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Country" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="PrimaryContactNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NomineeName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Pincode" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PrimaryContactNumber" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EmailID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CustomerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="database_firewall_rules">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="name" />
-            <PropertyRef Name="start_ip_address" />
-            <PropertyRef Name="end_ip_address" />
-            <PropertyRef Name="create_date" />
-            <PropertyRef Name="modify_date" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="start_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="end_ip_address" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityContainer Name="hackathonteam289_dbEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="HotelMasters" EntityType="Self.HotelMaster" />
-          <EntitySet Name="tblCustomerDetails" EntityType="Self.tblCustomerDetail" />
-          <EntitySet Name="tblMotorDetails" EntityType="Self.tblMotorDetail" />
-          <EntitySet Name="tblMotorPolicyTypes" EntityType="Self.tblMotorPolicyType" />
-          <EntitySet Name="tblMotorVendorDetails" EntityType="Self.tblMotorVendorDetail" />
-          <EntitySet Name="tblNomineeDetails" EntityType="Self.tblNomineeDetail" />
-          <EntitySet Name="database_firewall_rules" EntityType="Self.database_firewall_rules" />
-        </EntityContainer>
-      </Schema>
+        <Association Name="FK_tblMotorDetails_tblInsuranceTypes">
+          <End Type="hackathonteam289_dbModel.tblInsuranceType" Role="tblInsuranceType" Multiplicity="1" />
+          <End Type="hackathonteam289_dbModel.tblMotorDetail" Role="tblMotorDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblInsuranceType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorDetail">
+              <PropertyRef Name="InsuranceType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMotorDetails_tblMotorVehicleTypes">
+          <End Type="hackathonteam289_dbModel.tblMotorVehicleType" Role="tblMotorVehicleType" Multiplicity="1" />
+          <End Type="hackathonteam289_dbModel.tblMotorDetail" Role="tblMotorDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMotorVehicleType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorDetail">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMotorVendorDetails_tblMotorVehicleTypes">
+          <End Type="hackathonteam289_dbModel.tblMotorVehicleType" Role="tblMotorVehicleType" Multiplicity="0..1" />
+          <End Type="hackathonteam289_dbModel.tblMotorVendorDetail" Role="tblMotorVendorDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMotorVehicleType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorVendorDetail">
+              <PropertyRef Name="VehicleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tblMotorPaymentDetails_tblMotorVendorDetails">
+          <End Type="hackathonteam289_dbModel.tblMotorVendorDetail" Role="tblMotorVendorDetail" Multiplicity="1" />
+          <End Type="hackathonteam289_dbModel.tblMotorPaymentDetail" Role="tblMotorPaymentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblMotorVendorDetail">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tblMotorPaymentDetail">
+              <PropertyRef Name="VendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="hackathonteam289_dbModelStoreContainer" CdmEntityContainer="hackathonteam289_dbEntities1">
-          <EntitySetMapping Name="HotelMasters">
-            <EntityTypeMapping TypeName="hackathonteam289_dbModel.HotelMaster">
-              <MappingFragment StoreEntitySet="HotelMaster">
-                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
-                <ScalarProperty Name="RoomNo" ColumnName="RoomNo" />
-                <ScalarProperty Name="RoomType" ColumnName="RoomType" />
-                <ScalarProperty Name="Prize" ColumnName="Prize" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblCustomerDetails">
-            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblCustomerDetail">
-              <MappingFragment StoreEntitySet="tblCustomerDetails">
-                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-                <ScalarProperty Name="CustomerRefID" ColumnName="CustomerRefID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PrimaryContactNumber" ColumnName="PrimaryContactNumber" />
-                <ScalarProperty Name="SeccondaryContactNumber" ColumnName="SeccondaryContactNumber" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="SSN" ColumnName="SSN" />
-                <ScalarProperty Name="DrivingLicenseNo" ColumnName="DrivingLicenseNo" />
-                <ScalarProperty Name="DrivingLicenseExpiry" ColumnName="DrivingLicenseExpiry" />
-                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblMotorDetails">
-            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorDetail">
-              <MappingFragment StoreEntitySet="tblMotorDetails">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
-                <ScalarProperty Name="Make" ColumnName="Make" />
+          <EntitySetMapping Name="tblInsuranceTypes">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblInsuranceType">
+              <MappingFragment StoreEntitySet="tblInsuranceTypes">
                 <ScalarProperty Name="InsuranceType" ColumnName="InsuranceType" />
-                <ScalarProperty Name="ReleaseVersion" ColumnName="ReleaseVersion" />
-                <ScalarProperty Name="BaselineAmount" ColumnName="BaselineAmount" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblMotorPolicyTypes">
-            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorPolicyType">
-              <MappingFragment StoreEntitySet="tblMotorPolicyTypes">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="VechileType" ColumnName="VechileType" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
+          <EntitySetMapping Name="tblMotorVehicleTypes">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorVehicleType">
+              <MappingFragment StoreEntitySet="tblMotorVehicleTypes">
                 <ScalarProperty Name="UsageType" ColumnName="UsageType" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VechileType" ColumnName="VechileType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblMotorVendorDetails">
             <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorVendorDetail">
               <MappingFragment StoreEntitySet="tblMotorVendorDetails">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Features" ColumnName="Features" />
                 <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+                <ScalarProperty Name="Features" ColumnName="Features" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="VendorName" ColumnName="VendorName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblCustomerDetails">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblCustomerDetail">
+              <MappingFragment StoreEntitySet="tblCustomerDetails">
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="DrivingLicenseExpiry" ColumnName="DrivingLicenseExpiry" />
+                <ScalarProperty Name="DrivingLicenseNo" ColumnName="DrivingLicenseNo" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="SeccondaryContactNumber" ColumnName="SeccondaryContactNumber" />
+                <ScalarProperty Name="PrimaryContactNumber" ColumnName="PrimaryContactNumber" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="CustomerRefID" ColumnName="CustomerRefID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMediPolicyDetails">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMediPolicyDetail">
+              <MappingFragment StoreEntitySet="tblMediPolicyDetails">
+                <ScalarProperty Name="PremiumAmount" ColumnName="PremiumAmount" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="MinAmount" ColumnName="MinAmount" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="MaxAmount" ColumnName="MaxAmount" />
+                <ScalarProperty Name="PolicyName" ColumnName="PolicyName" />
+                <ScalarProperty Name="PolicyCode" ColumnName="PolicyCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMedTransactionDetails">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMedTransactionDetail">
+              <MappingFragment StoreEntitySet="tblMedTransactionDetails">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="TransactionNo" ColumnName="TransactionNo" />
+                <ScalarProperty Name="ChequeNo" ColumnName="ChequeNo" />
+                <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+                <ScalarProperty Name="PaymentTerm" ColumnName="PaymentTerm" />
+                <ScalarProperty Name="PolicyId" ColumnName="PolicyId" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMotorDetails">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorDetail">
+              <MappingFragment StoreEntitySet="tblMotorDetails">
+                <ScalarProperty Name="BaselineAmount" ColumnName="BaselineAmount" />
+                <ScalarProperty Name="ReleaseVersion" ColumnName="ReleaseVersion" />
+                <ScalarProperty Name="InsuranceType" ColumnName="InsuranceType" />
+                <ScalarProperty Name="Make" ColumnName="Make" />
+                <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMotorPaymentDetails">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorPaymentDetail">
+              <MappingFragment StoreEntitySet="tblMotorPaymentDetails">
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="EngineNo" ColumnName="EngineNo" />
+                <ScalarProperty Name="ChassisNo" ColumnName="ChassisNo" />
+                <ScalarProperty Name="PolicyNo" ColumnName="PolicyNo" />
+                <ScalarProperty Name="VendorID" ColumnName="VendorID" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMotorTypes">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorType">
+              <MappingFragment StoreEntitySet="tblMotorTypes">
+                <ScalarProperty Name="VehicleDesc" ColumnName="VehicleDesc" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblNomineeDetails">
             <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblNomineeDetail">
               <MappingFragment StoreEntitySet="tblNomineeDetails">
-                <ScalarProperty Name="NomineeID" ColumnName="NomineeID" />
-                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="PrimaryContactNumber" ColumnName="PrimaryContactNumber" />
-                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="database_firewall_rules">
-            <EntityTypeMapping TypeName="hackathonteam289_dbModel.database_firewall_rules">
-              <MappingFragment StoreEntitySet="database_firewall_rules">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
-                <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
-                <ScalarProperty Name="create_date" ColumnName="create_date" />
-                <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+                <ScalarProperty Name="PrimaryContactNumber" ColumnName="PrimaryContactNumber" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
+                <ScalarProperty Name="NomineeID" ColumnName="NomineeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

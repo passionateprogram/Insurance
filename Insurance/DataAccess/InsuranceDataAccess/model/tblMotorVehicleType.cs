@@ -12,22 +12,23 @@ namespace InsuranceDataAccess.model
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMotorVendorDetail
+    public partial class tblMotorVehicleType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblMotorVendorDetail()
+        public tblMotorVehicleType()
         {
-            this.tblMotorPaymentDetails = new HashSet<tblMotorPaymentDetail>();
+            this.tblMotorDetails = new HashSet<tblMotorDetail>();
+            this.tblMotorVendorDetails = new HashSet<tblMotorVendorDetail>();
         }
     
         public int ID { get; set; }
-        public string VendorName { get; set; }
-        public decimal Rate { get; set; }
-        public string Features { get; set; }
-        public Nullable<int> VehicleType { get; set; }
+        public int VechileType { get; set; }
+        public string Description { get; set; }
+        public string UsageType { get; set; }
     
-        public virtual tblMotorVehicleType tblMotorVehicleType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblMotorPaymentDetail> tblMotorPaymentDetails { get; set; }
+        public virtual ICollection<tblMotorDetail> tblMotorDetails { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblMotorVendorDetail> tblMotorVendorDetails { get; set; }
     }
 }

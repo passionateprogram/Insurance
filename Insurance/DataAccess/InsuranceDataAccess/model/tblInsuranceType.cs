@@ -12,22 +12,18 @@ namespace InsuranceDataAccess.model
     using System;
     using System.Collections.Generic;
     
-    public partial class tblMotorVendorDetail
+    public partial class tblInsuranceType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblMotorVendorDetail()
+        public tblInsuranceType()
         {
-            this.tblMotorPaymentDetails = new HashSet<tblMotorPaymentDetail>();
+            this.tblMotorDetails = new HashSet<tblMotorDetail>();
         }
     
         public int ID { get; set; }
-        public string VendorName { get; set; }
-        public decimal Rate { get; set; }
-        public string Features { get; set; }
-        public Nullable<int> VehicleType { get; set; }
+        public string InsuranceType { get; set; }
     
-        public virtual tblMotorVehicleType tblMotorVehicleType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblMotorPaymentDetail> tblMotorPaymentDetails { get; set; }
+        public virtual ICollection<tblMotorDetail> tblMotorDetails { get; set; }
     }
 }
