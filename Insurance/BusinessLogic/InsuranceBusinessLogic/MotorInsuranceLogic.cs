@@ -1,7 +1,9 @@
 ﻿using InsuranceDataAccess.crud.reader;
+using InsuranceDataAccess.crud.writer;
 using InsuranceDataAccess.model;
 using System.Collections.Generic;
 using System.Linq;
+
 namespace InsuranceBusinessLogic
 {
     public class MotorInsuranceLogic
@@ -84,6 +86,15 @@ namespace InsuranceBusinessLogic
             if (customerDetails != null)
                 return customerDetails.Select(x => BusinessUtility.Copy<tblCustomerDetail, CustomerDetail>(x, new CustomerDetail())).FirstOrDefault();
             return null;
+        }
+
+        public bool SetCustomerDetails(tblMotorPaymentDetail objMotorPaymentDetails)
+        {
+            if (objMotorPaymentDetails != null)
+                return true;
+            var MotPayDetails = new MotorDetailsWriter();
+            MotPayDetails.AddInsuranceTransacationData(objMotorPaymentDetails);
+            return true;
         }
 
         #region Dummy Entries

@@ -56,7 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="crud\reader\CustomerDetailsReader.cs" />
+    <Compile Include="crud\reader\TblMedicalDetailReader.cs" />
     <Compile Include="crud\reader\TblMotorDetailReader.cs" />
+    <Compile Include="crud\writer\MotorDetailsWriter.cs" />
     <Compile Include="model\Insurancedb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

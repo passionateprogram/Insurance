@@ -17,11 +17,11 @@ namespace InsuranceBusinessLogic
             if (vehicleAmount.HasValue)
             {
                 var depreciation = vehicleAmount.Value;
-                for (var i = manufacturingYear; i <= DateTime.Now.Year; i--)
+                for (var i = manufacturingYear; i >= DateTime.Now.Year; i--)
                 {
-                    depreciation = depreciation * (decimal)0.5;
+                    depreciation = depreciation * (decimal)0.05;
                 }
-                Premium = depreciation * Rate;
+                Premium = depreciation * (Rate / 100);
                 return string.Format("{0} offers the premuim of INR {1}/-", VendorName, Premium);
             }
             return null;
