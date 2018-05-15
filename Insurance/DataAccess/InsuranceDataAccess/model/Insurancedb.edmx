@@ -52,6 +52,18 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblCustomerDetails' does n
           <Property Name="InsuranceType" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'hackathonteam289_db.dbo.tblMedicalCompany' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblMedicalCompany">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+            <PropertyRef Name="CompnayCode" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="CompanyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CompnayCode" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="CompanyName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'hackathonteam289_db.dbo.tblMediPolicyDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblMediPolicyDetails">
           <Key>
@@ -163,6 +175,7 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblMotorTypes' does not ha
           <Property Name="Rate" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="Features" Type="varchar" MaxLength="150" />
           <Property Name="VehicleType" Type="int" />
+          <Property Name="ImageUrl" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -265,6 +278,13 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
     [tblCustomerDetails].[DrivingLicenseExpiry] AS [DrivingLicenseExpiry], 
     [tblCustomerDetails].[MaritalStatus] AS [MaritalStatus]
     FROM [dbo].[tblCustomerDetails] AS [tblCustomerDetails]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblMedicalCompany" EntityType="Self.tblMedicalCompany" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblMedicalCompany].[CompanyID] AS [CompanyID], 
+    [tblMedicalCompany].[CompnayCode] AS [CompnayCode], 
+    [tblMedicalCompany].[CompanyName] AS [CompanyName]
+    FROM [dbo].[tblMedicalCompany] AS [tblMedicalCompany]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="tblMediPolicyDetails" EntityType="Self.tblMediPolicyDetails" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -384,6 +404,7 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
             <End Role="tblMotorVendorDetail" EntitySet="tblMotorVendorDetails" />
             <End Role="tblMotorPaymentDetail" EntitySet="tblMotorPaymentDetails" />
           </AssociationSet>
+          <EntitySet Name="tblMedicalCompanies" EntityType="hackathonteam289_dbModel.tblMedicalCompany" />
         </EntityContainer>
         <EntityType Name="tblInsuranceType">
           <Key>
@@ -415,6 +436,7 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
           <Property Name="VehicleType" Type="Int32" />
           <NavigationProperty Name="tblMotorVehicleType" Relationship="hackathonteam289_dbModel.FK_tblMotorVendorDetails_tblMotorVehicleTypes" FromRole="tblMotorVendorDetail" ToRole="tblMotorVehicleType" />
           <NavigationProperty Name="tblMotorPaymentDetails" Relationship="hackathonteam289_dbModel.FK_tblMotorPaymentDetails_tblMotorVendorDetails" FromRole="tblMotorVendorDetail" ToRole="tblMotorPaymentDetail" />
+          <Property Name="ImageUrl" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblCustomerDetail">
           <Key>
@@ -614,6 +636,16 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblMedicalCompany">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+            <PropertyRef Name="CompnayCode" />
+            <PropertyRef Name="CompanyName" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CompnayCode" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -641,6 +673,7 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
           <EntitySetMapping Name="tblMotorVendorDetails">
             <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMotorVendorDetail">
               <MappingFragment StoreEntitySet="tblMotorVendorDetails">
+                <ScalarProperty Name="ImageUrl" ColumnName="ImageUrl" />
                 <ScalarProperty Name="VehicleType" ColumnName="VehicleType" />
                 <ScalarProperty Name="Features" ColumnName="Features" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
@@ -752,6 +785,15 @@ warning 6002: The table/view 'hackathonteam289_db.dbo.tblNomineeDetails' does no
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="NomineeName" ColumnName="NomineeName" />
                 <ScalarProperty Name="NomineeID" ColumnName="NomineeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblMedicalCompanies">
+            <EntityTypeMapping TypeName="hackathonteam289_dbModel.tblMedicalCompany">
+              <MappingFragment StoreEntitySet="tblMedicalCompany">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompnayCode" ColumnName="CompnayCode" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

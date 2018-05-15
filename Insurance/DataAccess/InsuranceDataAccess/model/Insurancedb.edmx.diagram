@@ -19,6 +19,7 @@
         <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorDetails_tblMotorVehicleTypes" />
         <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorVendorDetails_tblMotorVehicleTypes" />
         <AssociationConnector Association="hackathonteam289_dbModel.FK_tblMotorPaymentDetails_tblMotorVendorDetails" />
+        <EntityTypeShape EntityType="hackathonteam289_dbModel.tblMedicalCompany" Width="1.5" PointX="0.75" PointY="10.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

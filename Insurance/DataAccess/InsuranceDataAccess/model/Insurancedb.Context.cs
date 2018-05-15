@@ -35,5 +35,6 @@ namespace InsuranceDataAccess.model
         public virtual DbSet<tblMotorPaymentDetail> tblMotorPaymentDetails { get; set; }
         public virtual DbSet<tblMotorType> tblMotorTypes { get; set; }
         public virtual DbSet<tblNomineeDetail> tblNomineeDetails { get; set; }
+        public virtual DbSet<tblMedicalCompany> tblMedicalCompanies { get; set; }
     }
 }

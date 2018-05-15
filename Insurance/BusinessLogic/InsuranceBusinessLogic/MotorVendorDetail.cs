@@ -2,6 +2,7 @@
 
 namespace InsuranceBusinessLogic
 {
+    [Serializable]
     public class MotorVendorDetail
     {
         public int ID { get; set; }
@@ -9,6 +10,7 @@ namespace InsuranceBusinessLogic
         public decimal Rate { get; set; }
         public string Features { get; set; }
         public int? VehicleType { get; set; }
+        public string ImageUrl { get; set; }
 
         public decimal Premium { get; set; }
 

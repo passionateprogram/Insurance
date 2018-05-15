@@ -80,6 +80,9 @@
     <Compile Include="model\tblInsuranceType.cs">
       <DependentUpon>Insurancedb.tt</DependentUpon>
     </Compile>
+    <Compile Include="model\tblMedicalCompany.cs">
+      <DependentUpon>Insurancedb.tt</DependentUpon>
+    </Compile>
     <Compile Include="model\tblMediPolicyDetail.cs">
       <DependentUpon>Insurancedb.tt</DependentUpon>
     </Compile>

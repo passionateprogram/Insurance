@@ -25,6 +25,7 @@ namespace InsuranceDataAccess.model
         public decimal Rate { get; set; }
         public string Features { get; set; }
         public Nullable<int> VehicleType { get; set; }
+        public string ImageUrl { get; set; }
     
         public virtual tblMotorVehicleType tblMotorVehicleType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

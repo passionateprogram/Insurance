@@ -119,6 +119,17 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="style\background.png" />
+    <Content Include="style\bullet.png" />
+    <Content Include="style\car-insurance.jpg" />
+    <Content Include="style\graphic.png" />
+    <Content Include="style\link.png" />
+    <Content Include="style\maxresdefault.jpg" />
+    <Content Include="style\search.png" />
+    <Content Include="style\style.css" />
+    <Content Include="style\Telematics-Driving-Usage-Based-Auto-Insurance.png" />
+    <Content Include="style\transparent.png" />
+    <Content Include="style\transparent_light.png" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +150,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\InsuranceWebApps - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
